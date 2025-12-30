@@ -39,3 +39,6 @@
 
 # debug information files
 *.dwo
+
+lr_2/
+x64/
