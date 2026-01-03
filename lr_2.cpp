@@ -134,7 +134,7 @@ void task_7(vector<double>& collection_numbers) {
 
     for (int i = 0; i < collection_numbers.size(); i++) {
         integer_part_number = trunc(collection_numbers[i]);
-        if (fmod(integer_part_number,2) == 0.0) {
+        if (fmod(integer_part_number, 2) == 0.0) {
             sum_valid_numbers += collection_numbers[i];
             number_valid_numbers++;
         }
@@ -380,8 +380,8 @@ void task_17(vector<double>& collection_numbers) {
 
     for (int i = 0; i < collection_numbers.size(); i++) {
         integer_part_number = trunc(collection_numbers[i]);
-        if (fmod(integer_part_number,2) != 0) {
-            sum_valid_numbers += integer_part_number;
+        if (fmod(integer_part_number,2) != 0.0) {
+            sum_valid_numbers += collection_numbers[i];
             number_valid_numbers++;
         }
     }
@@ -616,12 +616,21 @@ void task_26(vector<double>& collection_numbers) {
 void task_27(vector<double>& collection_numbers) {
     int number_valid_numbers = 0;
     double integer_part_number;
-    int number_dozens;
+    double units_integer_part_number;
+    double dozens_integer_part_number;
 
     for (int i = 0; i < collection_numbers.size(); i++) {
-        integer_part_number = collection_numbers[i];
-        number_dozens = trunc(fmod(integer_part_number, 10));
-        if (fmod(fmod(integer_part_number, 10), number_dozens) == 0) {
+        integer_part_number = trunc(collection_numbers[i]);
+        units_integer_part_number = fmod(integer_part_number, 10);
+        dozens_integer_part_number = trunc(trunc(fmod(integer_part_number, 100)) * 0.1);
+        
+        if (fmod(units_integer_part_number, dozens_integer_part_number) == 0 || 
+            fmod(units_integer_part_number, dozens_integer_part_number) == -0) {
+            continue;
+        }
+
+        if (fmod(units_integer_part_number, dozens_integer_part_number) == 0) {
+            cout << "> " << units_integer_part_number << ' ' << dozens_integer_part_number << endl;
             number_valid_numbers++;
         }
     }
@@ -638,9 +647,9 @@ void task_27(vector<double>& collection_numbers) {
 
 int main()
 {
-    /*int number_rows = 4;
-    double x = 7.9999;
-    double step = 5.234;
+    double x;
+    double step;
+    int number_rows;
     int accurency = 4;
     double rounded_result;
     vector<double> collection_results = {};
@@ -660,34 +669,12 @@ int main()
         collection_results.push_back(rounded_result);
         x += step;
     }
-    cout << endl;*/
+    cout << endl;
 
-    vector<double> collection_results = {99.9375, 54.3940, 99.2839, -14.3804, -38.3530, 59.2596, -96.9108, 56.8404, -73.3353, 66.0847};
-    task_1(collection_results);
-    //task_2(collection_results);
-    //task_3(collection_results);
-    //task_4(collection_results);
-    //task_5(collection_results);
-    //task_6(collection_results);
-    //task_7(collection_results);
-    //task_8(collection_results);
-    //task_9(collection_results);
-    //task_10(collection_results);
-    //task_11(collection_results);
-    //task_12(collection_results);
-    //task_13(collection_results);
-    //task_14(collection_results);
-    //task_15(collection_results);
-    //task_16(collection_results);
-    //task_17(collection_results);
-    //task_18(collection_results);
-    //task_19(collection_results);
-    //task_20(collection_results);
-    //task_21(collection_results);
-    //task_22(collection_results);
-    //task_23(collection_results);
-    //task_24(collection_results);
-    //task_25(collection_results);
-    //task_26(collection_results);
-    //task_27(collection_results);
+    //vector<double> collection_results = { 0, 54.3940, 99.2839, -14.3804, -38.3530, 59.2596, -96.9108, 56.8404, -73.3353, 66.0847 };
+    task_7(collection_results);
+    //collection_results = { 0, 39.8586, 16.2776, -17.6082, 30.3224, -82.9544, 1.3268, -76.8205, -93.9243, 86.6925 };
+    task_17(collection_results);
+    //vector<double> collection_results = { 75.7779, 25.2832, -4.0749, 15.0214, 16.0161, -33.4151, -72.2420, -74.1095, 64.4232, -52.7916 };
+    task_27(collection_results);
 }
